@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using Task_Frank_db.Models;
 
 namespace Task_Frank_db
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to continue.");
+            //Console.ReadKey();
 
             // Person
             int age;
@@ -23,32 +25,32 @@ namespace Task_Frank_db
 
             // Todo gather Address information
 
-            Console.WriteLine("Enter your first name: ");
-            firstName = Console.ReadLine();
+            //Console.WriteLine("Enter your first name: ");
+            //firstName = Console.ReadLine();
 
-            Console.WriteLine("Enter your last name: ");
-            lastName = Console.ReadLine();
+            //Console.WriteLine("Enter your last name: ");
+            //lastName = Console.ReadLine();
 
-            Console.WriteLine("Enter your gender: ");
-            gender = Console.ReadLine();
+            //Console.WriteLine("Enter your gender: ");
+            //gender = Console.ReadLine();
 
-            Console.WriteLine("Enter your age: ");
+            //Console.WriteLine("Enter your age: ");
 
             // Todo check the input data
             // Converted string to int
-            age = Convert.ToInt32(Console.ReadLine());
+            //age = Convert.ToInt32(Console.ReadLine());
 
 
-            Console.WriteLine("Enter your streetname: ");
-            streetName = Console.ReadLine();
+            //Console.WriteLine("Enter your streetname: ");
+            //streetName = Console.ReadLine();
 
-            Console.WriteLine("Enter your town: ");
-            town = Console.ReadLine();
+            //Console.WriteLine("Enter your town: ");
+            //town = Console.ReadLine();
 
-            Console.WriteLine("Enter your houseNumber: ");
-            houseNumber = Console.ReadLine();
+            //Console.WriteLine("Enter your houseNumber: ");
+            //houseNumber = Console.ReadLine();
 
-            var newPerson = new Person
+            /*var newPerson = new Person
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -62,6 +64,16 @@ namespace Task_Frank_db
                 HouseNumber = houseNumber,
                 Town = town
             };
+            */
+            /*
+            var options = new DbContextOptionsBuilder<PersonAddressDBContext>()
+                .UseSqlite("Filename=../../../MyLocalDB.db")
+                .Options;
+
+            using var db = new PersonAddressDBContext(options);
+
+            db.Database.EnsureCreated();
+            */
         }
     }
 }
