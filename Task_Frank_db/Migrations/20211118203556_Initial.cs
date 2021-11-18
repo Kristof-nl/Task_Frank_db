@@ -2,7 +2,7 @@
 
 namespace Task_Frank_db.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,34 +29,22 @@ namespace Task_Frank_db.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "varchar(25)", nullable: true),
                     LastName = table.Column<string>(type: "varchar(25)", nullable: true),
-                    Age = table.Column<string>(type: "varchar(25)", nullable: false),
-                    varchar3 = table.Column<string>(name: "varchar(3)", type: "nvarchar(max)", nullable: true),
-                    AddressID = table.Column<int>(type: "int", nullable: false)
+                    Age = table.Column<string>(type: "varchar(3)", nullable: false),
+                    Gender = table.Column<string>(type: "varchar(25)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Persons", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Persons_Addresses_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Addresses",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Persons_AddressID",
-                table: "Persons",
-                column: "AddressID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Persons");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Persons");
         }
     }
 }

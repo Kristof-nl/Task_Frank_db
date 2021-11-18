@@ -9,8 +9,8 @@ using Task_Frank_db.Models;
 namespace Task_Frank_db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20211116223117_initial")]
-    partial class initial
+    [Migration("20211118203556_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,39 +48,22 @@ namespace Task_Frank_db.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Age")
                         .IsRequired()
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("varchar(3)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("varchar(25)");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("varchar(3)");
+                        .HasColumnType("varchar(25)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("varchar(25)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AddressID");
-
                     b.ToTable("Persons");
-                });
-
-            modelBuilder.Entity("Task_Frank_db.Models.Person", b =>
-                {
-                    b.HasOne("Task_Frank_db.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

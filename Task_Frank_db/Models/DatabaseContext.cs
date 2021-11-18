@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Task_Frank_db.Models
 {
-    class DatabaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public DbSet<Person> Users { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

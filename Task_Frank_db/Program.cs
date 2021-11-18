@@ -9,11 +9,12 @@ namespace Task_Frank_db
 
         static void Main(string[] args)
         {
-            //Console.WriteLine("Press any key to continue.");
-            //Console.ReadKey();
+
+            bool menu = true;
+            int choose = 0;
 
             // Person
-            int age;
+            int age = 0;
             string firstName;
             string lastName;
             string gender;
@@ -23,29 +24,97 @@ namespace Task_Frank_db
             string town;
             string houseNumber;
 
-            // Todo gather Address information
 
-            //Console.WriteLine("Enter your first name: ");
-            //firstName = Console.ReadLine();
+            while (menu)
+            {
+                Console.WriteLine("Choose an action by typing his number: ");
+                Console.WriteLine("1 - Add Person to database");
+                Console.WriteLine("2 - See whole database");
+                Console.WriteLine("3 - Search for a specific data in the database");
+                Console.WriteLine("4 - Exit program");
+                try
+                {
+                    int tempChoose = Convert.ToInt32(Console.ReadLine());
+                    if (tempChoose >= 1 && tempChoose <= 4)
+                    {
+                        choose = tempChoose;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bad input. Try again.");
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Bad input. Try again.");
+                }
 
-            //Console.WriteLine("Enter your last name: ");
-            //lastName = Console.ReadLine();
+                if (choose == 1)
+                {
+                    Console.WriteLine("Enter your first name: ");
+                    firstName = Console.ReadLine();
 
-            //Console.WriteLine("Enter your gender: ");
-            //gender = Console.ReadLine();
+                    Console.WriteLine("Enter your last name: ");
+                    lastName = Console.ReadLine();
 
-            //Console.WriteLine("Enter your age: ");
+                    Console.WriteLine("Enter your age: ");
+                    try
+                    {
+                        int tempAge = Convert.ToInt32(Console.ReadLine());
+                        if (tempAge >= 0 && tempAge <= 130)
+                        {
+                            age = tempAge;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Bad input. Age must be between 0 and 130.");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Bad input. Age must be between 0 and 130.");
+                    }
 
-            // Todo check the input data
-            // Converted string to int
-            //age = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter your gender: ");
+                    gender = Console.ReadLine();
+
+                    Console.WriteLine("Enter your town: ");
+                    town = Console.ReadLine();
+
+                    Console.WriteLine("Enter streetname: ");
+                    streetName = Console.ReadLine();
+
+                    Console.WriteLine("Enter your houseNumber: ");
+                    houseNumber = Console.ReadLine();
 
 
-            //Console.WriteLine("Enter your streetname: ");
-            //streetName = Console.ReadLine();
+                    using DatabaseContext myContext = new DatabaseContext();
+                    myContext.Persons.Add(new Person()
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Age = age,
+                        Gender = gender
+                    }
+                    );
+                    myContext.Addresses.Add(new Address()
+                    {
+                        Town = town,
+                        StreetName = streetName,
+                        HouseNumber = houseNumber
+                    }
+                    );
+                    myContext.SaveChanges();
+                }
 
-            //Console.WriteLine("Enter your town: ");
-            //town = Console.ReadLine();
+
+            }
+            
+
+
+
+
+
 
             //Console.WriteLine("Enter your houseNumber: ");
             //houseNumber = Console.ReadLine();
@@ -64,15 +133,6 @@ namespace Task_Frank_db
                 HouseNumber = houseNumber,
                 Town = town
             };
-            */
-            /*
-            var options = new DbContextOptionsBuilder<PersonAddressDBContext>()
-                .UseSqlite("Filename=../../../MyLocalDB.db")
-                .Options;
-
-            using var db = new PersonAddressDBContext(options);
-
-            db.Database.EnsureCreated();
             */
         }
     }
