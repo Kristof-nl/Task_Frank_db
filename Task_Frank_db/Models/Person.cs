@@ -7,7 +7,7 @@ namespace Task_Frank_db.Models
     public class Person
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Column(TypeName ="varchar(25)")]
         public string FirstName { get; set; }
         [Column(TypeName ="varchar(25)")]
@@ -16,6 +16,11 @@ namespace Task_Frank_db.Models
         public int Age { get; set; }
         [Column(TypeName = "varchar(25)")]
         public string Gender { get; set; }
+        public Address Address { get; set; }
+
+
+
+        //public  Address Address { get; set; }
 
     }
 }

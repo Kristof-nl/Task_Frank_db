@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Task_Frank_db.Models;
 
 namespace Task_Frank_db
@@ -89,51 +91,47 @@ namespace Task_Frank_db
 
 
                     using DatabaseContext myContext = new DatabaseContext();
-                    myContext.Persons.Add(new Person()
+                    var person = new Person()
                     {
                         FirstName = firstName,
                         LastName = lastName,
                         Age = age,
-                        Gender = gender
-                    }
-                    );
-                    myContext.Addresses.Add(new Address()
-                    {
-                        Town = town,
-                        StreetName = streetName,
-                        HouseNumber = houseNumber
-                    }
-                    );
+                        Gender = gender,
+                        Address = new Address
+                        {
+                            Town = town,
+                            StreetName = streetName,
+                            HouseNumber = houseNumber
+                        }
+                    };
+
+
+                    myContext.Persons.Add(person);
                     myContext.SaveChanges();
                 }
 
 
+                if (choose == 2)
+                {
+
+                    DatabaseContext db = new DatabaseContext();
+                    var a = db.Persons;
+                    foreach (var i in a)
+                    {
+                        Console.WriteLine(i.FirstName);
+                    }
+                    
+
+
+
+                    Console.WriteLine(a);
+                    
+                    
+                    
+
+                }
             }
-            
 
-
-
-
-
-
-            //Console.WriteLine("Enter your houseNumber: ");
-            //houseNumber = Console.ReadLine();
-
-            /*var newPerson = new Person
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Age = age,
-                Gender = gender
-            };
-
-            var newAddress = new Address
-            {
-                StreetName = streetName,
-                HouseNumber = houseNumber,
-                Town = town
-            };
-            */
         }
     }
 }

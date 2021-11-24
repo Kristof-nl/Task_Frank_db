@@ -20,6 +20,17 @@ namespace Task_Frank_db.Models
             }
                 base.OnConfiguring(optionsBuilder);
         }
+
+        /*
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Address>()
+                .HasOne(a => a.Person)
+                .WithOne(b => b.Address)
+                .HasForeignKey<Address>(b => b.Person_Id);
+        }
+        */
+
     }
     
 }

@@ -9,8 +9,8 @@ using Task_Frank_db.Models;
 namespace Task_Frank_db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20211118203556_Initial")]
-    partial class Initial
+    [Migration("20211124191114_temp")]
+    partial class temp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace Task_Frank_db.Migrations
 
             modelBuilder.Entity("Task_Frank_db.Models.Address", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -30,20 +30,26 @@ namespace Task_Frank_db.Migrations
                     b.Property<string>("HouseNumber")
                         .HasColumnType("varchar(25)");
 
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
                     b.Property<string>("StreetName")
                         .HasColumnType("varchar(25)");
 
                     b.Property<string>("Town")
                         .HasColumnType("varchar(25)");
 
-                    b.HasKey("ID");
+                    b.HasKey("AddressId");
+
+                    b.HasIndex("PersonID")
+                        .IsUnique();
 
                     b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Task_Frank_db.Models.Person", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -61,9 +67,25 @@ namespace Task_Frank_db.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("varchar(25)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Persons");
+                });
+
+            modelBuilder.Entity("Task_Frank_db.Models.Address", b =>
+                {
+                    b.HasOne("Task_Frank_db.Models.Person", "Person")
+                        .WithOne("Address")
+                        .HasForeignKey("Task_Frank_db.Models.Address", "PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Task_Frank_db.Models.Person", b =>
+                {
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }
