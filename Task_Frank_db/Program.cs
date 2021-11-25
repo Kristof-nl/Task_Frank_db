@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Task_Frank_db.Models;
+using Task_Frank_db;
+using static Task_Frank_db.MenuFunctions;
 
 namespace Task_Frank_db
 {
@@ -113,22 +115,7 @@ namespace Task_Frank_db
 
                 if (choose == 2)
                 {
-
-                    DatabaseContext db = new DatabaseContext();
-                    var a = db.Persons;
-                    foreach (var i in a)
-                    {
-                        Console.WriteLine(i.FirstName);
-                    }
-                    
-
-
-
-                    Console.WriteLine(a);
-                    
-                    
-                    
-
+                   GetAll();
                 }
             }
 

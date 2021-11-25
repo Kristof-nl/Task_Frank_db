@@ -7,14 +7,13 @@ namespace Task_Frank_db.Models
     public class Address
     {
         [Key]
-        public int AddressId { get; set; }
         [Column(TypeName = "varchar(25)")]
         public string Town { get; set; }
         [Column(TypeName = "varchar(25)")]
         public string StreetName { get; set; }
         [Column(TypeName = "varchar(25)")]
         public string HouseNumber { get; set; }
-        
+
         public int PersonID { get; set; }
         public Person Person { get; set; }
 
