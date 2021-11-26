@@ -21,7 +21,7 @@ namespace Task_Frank_db.Models
                 base.OnConfiguring(optionsBuilder);
         }
 
-        /*
+        /*Foreign Key made with fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Address>()

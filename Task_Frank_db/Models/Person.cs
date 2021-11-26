@@ -18,9 +18,5 @@ namespace Task_Frank_db.Models
         public string Gender { get; set; }
         public Address Address { get; set; }
 
-
-
-        //public  Address Address { get; set; }
-
     }
 }

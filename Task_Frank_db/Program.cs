@@ -6,6 +6,7 @@ using Task_Frank_db.Models;
 using Task_Frank_db;
 using static Task_Frank_db.MenuViewFunctions;
 using static Task_Frank_db.Menu.UpdateMenuFunctions;
+using static Task_Frank_db.Menu.DeleteMenuFunctions;
 
 namespace Task_Frank_db
 {
@@ -32,15 +33,17 @@ namespace Task_Frank_db
 
             while (menu)
             {
-                Console.WriteLine("Choose an action by typing his number: ");
-                Console.WriteLine("1 - Add Person to database");
-                Console.WriteLine("2 - See whole database");
+                Console.WriteLine("Choose an action by typing its number: ");
+                Console.WriteLine("1 - Add new person to the database");
+                Console.WriteLine("2 - See the whole database");
                 Console.WriteLine("3 - Search for a specific data in the database");
-                Console.WriteLine("4 - Exit program");
+                Console.WriteLine("4 - Update data in the database");
+                Console.WriteLine("5 - Delete person from the database");
+                Console.WriteLine("6 - Exit program");
                 try
                 {
                     int tempChoose = Convert.ToInt32(Console.ReadLine());
-                    if (tempChoose >= 1 && tempChoose <= 4)
+                    if (tempChoose >= 1 && tempChoose <= 6)
                     {
                         choose = tempChoose;
                     }
@@ -123,7 +126,7 @@ namespace Task_Frank_db
 
                     while (flag)
                     {
-                        Console.WriteLine("Choose an action by typing his number: ");
+                        Console.WriteLine("Choose an action by typing its number: ");
                         Console.WriteLine("1 - Search a person by his lastname");
                         Console.WriteLine("2 - Search a person by his town");
                         try
@@ -145,7 +148,7 @@ namespace Task_Frank_db
 
                         if (choose == 1)
                         {
-                            Console.Write("Write a lastname what you're looking for: ");
+                            Console.Write("\nWrite a lastname what you're looking for: ");
                             string userLastName = Console.ReadLine();
                             GetLastName(userLastName);
                             flag = false;
@@ -153,7 +156,7 @@ namespace Task_Frank_db
 
                         if (choose == 2)
                         {
-                            Console.Write("Write a town what you're looking for: ");
+                            Console.Write("\nWrite a town what you're looking for: ");
                             string userTown = Console.ReadLine();
                             GetTown(userTown);
                             flag = false;
@@ -162,33 +165,61 @@ namespace Task_Frank_db
                 }
                 if (choose == 4)
                 {
-                    DatabaseContext db = new DatabaseContext();
-                    var count = db.Persons.Count();
-                    
-                    Console.WriteLine(count);
+                    bool idFlag = true;
+                    int personId = 0;
 
-                    Console.Write("Write an id person to edit");
-                    try
+                    while (idFlag)
                     {
+                        DatabaseContext db = new DatabaseContext();
+                        var count = db.Persons.Count();
 
+                        Console.WriteLine($"\nWe have {count} persons in the database");
 
-                        int tempChoose = Convert.ToInt32(Console.ReadLine());
-                        if (tempChoose >= 1 && tempChoose <= 4)
+                        Console.WriteLine("Write a person id to edit this person\n");
+                        try
                         {
-                            choose = tempChoose;
+                            int tempChoose = Convert.ToInt32(Console.ReadLine());
+                            if (tempChoose >= 1 && tempChoose <= count)
+                            {
+                                personId = tempChoose;
+                                idFlag = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nBad input. Person with this id doesn't exist in the database\n");
+                            }
                         }
-                        else
+                        catch
                         {
                             Console.WriteLine("\nBad input. Try again.\n");
                         }
                     }
-                    catch
-                    {
-                        Console.WriteLine("\nBad input. Try again.\n");
-                    }
+                    Update(personId);
 
-                    //string userTown = Console.ReadLine();
-                    //Update("1");
+                }
+
+                if (choose == 5)
+                {
+                    bool idFlag = true;
+                    while (idFlag)
+                    {
+                        Console.WriteLine("Write a person id to delete this person");
+                        try
+                        {
+                            int personId = Convert.ToInt32(Console.ReadLine());
+                            DeletePerson(personId);
+                            idFlag = false;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("\nBad input. Try again.\n");
+                        }
+                    }
+                }
+
+                if (choose == 6)
+                {
+                    menu = false;
                 }
             }
 
